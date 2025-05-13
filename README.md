@@ -26,3 +26,5 @@ Before any SQL or Python, clarify:
 → Use anonymized or pseudonymized data only  
 → Keep audit trails clean  
 → Only use the minimum necessary fields
+
+You can see code examples in SQL and Python [here](https://github.com/Pegah-Asadi/Data-Analysis-Schema/blob/main/Pseudonymization.md).
