@@ -112,3 +112,64 @@ Common best practices:
 
 🔐 Privacy & Governance Plan  
 → Fields masked or pseudonymized, access rationale, logging strategy
+
+---
+
+## **🧰 3 | Extraction & Preparation**
+
+This is where raw data turns into something meaningful. Your goal: extract the right data, clean it, and shape it into an analysis-ready format.
+
+### 🏗️ Step-by-Step Workflow
+
+| Step          | Common Tools                              | Output                              |
+| ------------- | ----------------------------------------- | ----------------------------------- |
+| **Extract**   | SQL (BigQuery, Snowflake, Redshift, etc.) | Source tables filtered & joined     |
+| **Transform** | Python (pandas), dbt, R, Spark            | Cleaned, structured dataset         |
+| **Validate**  | Python (asserts, checks), SQL             | QC/validation report, sanity checks |<br><br><br>
+
+### 🔄 Key Principles
+
+✅ Write Modular SQL  
+- Use CTEs (Common Table Expressions) to break down logic  
+- Keep queries readable and reusable
+- Example:
+```SQL
+WITH filtered_events AS (
+  SELECT *
+  FROM events
+  WHERE event_date >= '2024-01-01'
+)
+SELECT user_id, COUNT(*) AS event_count
+FROM filtered_events
+GROUP BY user_id;
+```
+
+&nbsp;
+
+🧼 Transform in Code  
+Use pandas or dbt to:
+- Handle missing values  
+- Create new features  
+- Normalize and filter data  
+
+- Example:
+```Python
+df['signup_date'] = pd.to_datetime(df['signup_date'])
+df['days_since_signup'] = (today - df['signup_date']).dt.days
+```
+
+&nbsp;
+
+🧪 Validate Your Output  
+- Add assertions to catch edge cases and silent errors early:  
+```Pyhton
+assert df['user_id'].isnull().sum() == 0, "Missing user IDs!"
+assert df['age'].between(0, 120).all(), "Invalid age values!"
+```
+- Create a QC report: null %s, duplicate counts, type mismatches, etc.<br><br><br>
+
+### 📦 Deliverables for This Step  
+- Clean dataset — ready for EDA or modeling  
+- Modular extraction SQL — readable, reusable, and easy to debug  
+- Validation report or notebook — with assertions, checks, and summary stats
+
