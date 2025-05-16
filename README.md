@@ -173,3 +173,13 @@ assert df['age'].between(0, 120).all(), "Invalid age values!"
 - Modular extraction SQL — readable, reusable, and easy to debug  
 - Validation report or notebook — with assertions, checks, and summary stats
 
+### 🧹 Bonus: Ready-to-Use Python Scripts
+Want practical code to speed up cleaning and validation?
+
+📂 Check out the general [Python scripts](https://github.com/Pegah-Asadi/Data-Analysis-Schema/blob/main/Data_Cleaning_and_Validation.md) for data cleaning and validation
+
+These cover:  
+🔁 Removing duplicates  
+🕳️ Handling missing values  
+🚨 Detecting outliers  
+✅ Validating schema, value ranges, and data integrity using assert statements  
