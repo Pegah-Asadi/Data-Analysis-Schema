@@ -84,4 +84,31 @@ Look for:
 - Mismatched joins or keys
 
 ✅ Tip: Automate basic checks if possible  
-(Saved me 20% time by catching issues early.)
+(Saved me 20% time by catching issues early.)<br><br><br>
+
+### 🔐 Review Access & Privacy
+
+Make sure your data access aligns with legal, contractual, or internal governance policies.
+
+Common best practices:  
+- Use pseudonymized or anonymized IDs when sharing data  
+- Limit fields to the minimum necessary  
+- Keep processing logs or audit trails if required  
+- Understand any compliance frameworks (e.g., GDPR, SOC2, HIPAA if applicable)
+
+📄 Privacy Checklist:  
+- Personally identifiable info (PII) removed or masked  
+- Only essential fields used  
+- Shared files don’t expose sensitive data  
+- Access is role-based and logged<br><br><br>
+
+### 🗂️ Deliverables for This Step
+
+📋 Data Inventory Table  
+→ Clear list of all relevant tables, key fields, and purpose
+
+📊 Data Quality Report  
+→ Null rates, duplicate counts, basic sanity checks
+
+🔐 Privacy & Governance Plan  
+→ Fields masked or pseudonymized, access rationale, logging strategy
