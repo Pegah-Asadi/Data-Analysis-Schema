@@ -183,3 +183,75 @@ These cover:
 🕳️ Handling missing values  
 🚨 Detecting outliers  
 ✅ Validating schema, value ranges, and data integrity using assert statements  
+
+## **🔍 4 | Exploratory Data Analysis (EDA) & Hypothesis Generation**
+
+Before you build a model or design an experiment, get to know your data.  
+EDA helps you spot patterns, uncover issues, and identify the relationships worth testing.
+
+🎯 Goals of This Step  
+- Understand distributions, trends, and anomalies  
+- Spot correlations and patterns  
+- Form hypotheses grounded in real data  
+- Get business and technical teams aligned before deeper analysis
+
+### ⚙️ EDA Workflow Summary
+
+| Subtask                  | Tool(s)                  | Why It Matters                        | Example Action                      |
+| ------------------------ | ------------------------ | ------------------------------------- | ----------------------------------- |
+| Distributions & Outliers | Python (Seaborn, pandas) | Identify skewed data & extreme values | `sns.histplot()`, `sns.boxplot()`   |
+| Time-based Trends        | Looker, Tableau          | Spot seasonal effects or churn spikes | Line charts by day/week/month       |
+| Correlation Matrix       | Python (Seaborn)         | Understand variable relationships     | `df.corr()`, `sns.heatmap()`        |
+| Variable Pair Trends     | Tableau or Python        | Visually inspect pairwise trends      | Scatter plots with trendlines       |
+| Group Comparisons        | SciPy, statsmodels       | Check if group differences are real   | `ttest_ind()`, `chi2_contingency()` |<br><br><br>
+
+### **🧭 1. Data Profiling: “What does the data look like?”**
+
+Start by exploring:  
+- Key metrics (e.g. # transactions, avg session duration, revenue per user)  
+- Value ranges, missingness, outliers
+
+📈 Sample: Time-based Trends (Looker/Tableau)  
+- Plot engagement, revenue, or sign-ups over time  
+- Slice by day-of-week, campaign, or product  
+- Example: Identify drop-offs after onboarding, spikes during promotions<br><br><br>
+
+### **🔗 2. Correlations & Patterns: “What moves together?”**
+
+Look for relationships between variables.
+
+Use this to:  
+- Understand leading indicators of conversion, churn, or retention  
+- Avoid multicollinearity in models
+
+📂 [See sample code for EDA →](./EDA_Sample_Code.md) <br><br><br>
+
+### **🧪 3. Statistical Testing: “Is this difference real?”**
+
+Use tests like t-tests, chi-square, or Mann-Whitney U to validate patterns in data.
+
+Use when comparing:  
+- Conversion rates across landing pages  
+- Engagement before/after a feature rollout  
+- Retention between cohorts
+
+📂 [See sample code for hypothesis testing →](./Hypothesis_Testing_Sample_Code.md)<br><br><br>
+
+### **💡 4. Generate Hypotheses**
+
+Good hypotheses are:
+- Testable (you can collect or analyze the needed data)  
+- Specific (clear variables, direction, expected impact)  
+- Relevant (linked to a business goal)  
+
+**💭 Generic Example Hypotheses:**
+1. "Users who see the onboarding tutorial complete 25% more actions in week 1."  
+2. "Product reviews with images have higher average ratings than those without."  
+3. "Sending reminder emails reduces cart abandonment by 10%."  
+4. "Customers acquired via referral have higher LTV than paid users."<br><br><br>
+
+### 🧾 Deliverables for This Step  
+- Visualizations (distributions, trends, correlation plots)  
+- Group comparison test results (e.g. t-test output)  
+- A short list of hypotheses to test next  
+- Optional: a 1-pager summarizing key EDA findings for your stakeholders  
