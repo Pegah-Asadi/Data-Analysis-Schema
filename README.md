@@ -28,7 +28,7 @@ Before any SQL or Python, clarify:
 → Keep audit trails clean  
 → Only use the minimum necessary fields
 
-[💻 See code examples in SQL and Python](https://github.com/Pegah-Asadi/Data-Analysis-Schema/blob/main/Pseudonymization.md).
+[💻 See code examples in SQL and Python](./Pseudonymization.md).
 
 ---
 
@@ -176,13 +176,15 @@ assert df['age'].between(0, 120).all(), "Invalid age values!"
 ### 🧹 Bonus: Ready-to-Use Python Scripts
 Want practical code to speed up cleaning and validation?
 
-📂 Check out the general [Python scripts](https://github.com/Pegah-Asadi/Data-Analysis-Schema/blob/main/Data_Cleaning_and_Validation.md) for data cleaning and validation
+📂 Check out the general [Python scripts](./Data_Cleaning_and_Validation.md) for data cleaning and validation
 
 These cover:  
 🔁 Removing duplicates  
 🕳️ Handling missing values  
 🚨 Detecting outliers  
 ✅ Validating schema, value ranges, and data integrity using assert statements  
+
+---
 
 ## **🔍 4 | Exploratory Data Analysis (EDA) & Hypothesis Generation**
 
@@ -254,4 +256,224 @@ Good hypotheses are:
 - Visualizations (distributions, trends, correlation plots)  
 - Group comparison test results (e.g. t-test output)  
 - A short list of hypotheses to test next  
-- Optional: a 1-pager summarizing key EDA findings for your stakeholders  
+- Optional: a 1-pager summarizing key EDA findings for your stakeholders
+
+---
+
+## **🧪 5 | Experiment or Modeling Design**
+
+This step is about how you validate your hypotheses. Based on the question, you’ll either:  
+- Test a causal relationship with an experiment (e.g., A/B test)  
+- Predict an outcome with a machine learning model  
+- Choosing the right method ensures your analysis answers the business question clearly and reliably.  
+
+### 🎯 When to Use What?
+
+| Question Type                            | Use This Method       |
+| ---------------------------------------- | --------------------- |
+| What is the impact of doing X?           | A/B Test (Experiment) |
+| Can we predict who will do Y?            | Predictive Modeling   |
+| Should we show version A or B of a page? | A/B Test              |
+| Who are the high-risk users for Z?       | Modeling              |
+
+### **A. ✳️ A/B Testing (Experiment Design)**
+
+Use this when you want to test cause and effect.
+
+**Common Use Cases:**  
+- Does a new feature increase retention?  
+- Do email reminders reduce drop-off?  
+- Which landing page converts better?  
+
+**✅ Key Steps for A/B Testing**   
+1. Define Groups
+   - Control Group: No change
+   - Test Group: Receives the change (e.g., new feature, message)
+2. Choose Metrics
+   - Primary Metric: What you're testing (e.g., conversion rate, engagement)
+   - Guardrails: What should not be negatively impacted (e.g., churn, cost)
+3. Calculate Sample Size
+Use power analysis to ensure you can detect a meaningful difference.
+
+📂 Example code snippet for calculating sample size:
+```python
+from statsmodels.stats.power import tt_ind_solve_power
+
+# Parameters
+effect_size = 0.2  # Small effect size (standardized difference)
+alpha = 0.05       # 5% significance level
+power = 0.8        # 80% chance of detecting an effect
+
+# Calculate
+sample_size_per_group = tt_ind_solve_power(effect_size=effect_size, alpha=alpha, power=power)
+print(f"Required sample size per group: {int(sample_size_per_group)} users")
+```
+
+5. Randomization Plan
+Ensure fair, unbiased assignment using hashing or row numbers.
+
+📂 Example code snippet for hashing:
+```python
+MOD(FARM_FINGERPRINT(CAST(user_id AS STRING)), 100)
+# FARM_FINGERPRINT(...): creates a hash of the user ID. This generates a deterministic but seemingly random number — perfect for consistent random assignment.
+# MOD(..., 100): gets the last two digits (like a bucket from 0 to 99). So we have 100 buckets total.
+```
+
+📂 Example code snippet in case you want an exact count:
+```python
+ROW_NUMBER() OVER (ORDER BY RAND()) AS row_num
+```
+
+7. Run & Monitor
+   - Duration: 2–4 weeks (depending on volume)
+   - Track metrics in real time via dashboard
+8. Analyze Results
+Use statistical tests (like t-tests) to validate outcomes.
+
+📂 Example code snippet:
+```python
+import scipy.stats as stats
+
+# Assume you have two arrays: control_engagement, test_engagement
+t_stat, p_value = stats.ttest_ind(control_engagement, test_engagement)
+
+print(f"T-statistic: {t_stat:.3f}, p-value: {p_value:.3f}")
+```
+
+### **B. 🤖 Predictive Modeling**
+
+Use this when you want to forecast outcomes based on patterns.
+
+**Common Use Cases:**  
+- Predict customer churn  
+- Identify high-value leads  
+- Forecast sales or engagement  
+
+**✅ Key Steps for Modeling**  
+1. Define the Target  
+   - Classification (e.g., churn: yes/no)
+   - Regression (e.g., expected spend)
+2. Feature Engineering
+   - Create variables from raw data (e.g., logins, tenure)
+   - Scale or encode if needed
+3. Model Selection
+   - Logistic Regression: Simple classification
+   - Random Forest, XGBoost: More flexible and powerful
+4. Train & Validate
+   - Use K-Fold cross-validation
+   - Track accuracy, precision, recall, ROC-AUC
+5. Interpret Results
+   - Examine feature importance
+   - Validate business relevance
+
+📂 See predictive modeling code example →<br><br><br>
+
+### **📝 Deliverables for This Step**
+1. For A/B Testing:
+   - Experiment plan (groups, metrics, success criteria)
+   - Sample size justification
+   - Clean statistical results
+
+2. For Modeling:
+   - Feature list and preprocessing steps
+   - Model performance metrics
+   - Key insights (top predictors, expected outcomes)
+
+
+---
+
+## **🚀 6 | Implementation & Monitoring**
+
+This is where your analysis goes live—whether it’s a new experiment, a predictive model, or a business rule change.
+
+**Your job is to make sure:**  
+- The right data is collected  
+- Stakeholders can track what’s happening  
+- Issues are caught early and actioned fast  
+
+### **🔧 1. Instrumentation — Set Up the Right Tracking**
+
+Goal: Ensure your product or system logs the right data to measure outcomes and impact.
+
+What to do:  
+Work with engineers or product owners to define key events
+
+Clarify:  
+- What to track (e.g., button clicks, transactions, feature usage)  
+- When to trigger it (e.g., after confirmation, on success)  
+- Which properties to include (e.g., user ID, timestamp, session length)  
+
+Example Events:
+feature_shown, feature_clicked, conversion_completed
+experiment_group_assigned, email_opened, app_crash
+
+✅ Tip: Always log a unique ID and timestamp for joinability and time-based analysis
+
+### **📊 2. Live Dashboards — Monitor Metrics in Real Time**
+
+Goal: Keep all stakeholders informed of the impact and performance.
+
+What to do:  
+1. Build interactive dashboards in Looker, Tableau, Power BI, or Metabase
+2. Segment by key dimensions (e.g., country, user type, traffic source)
+3. Make dashboards user-friendly for:
+   - PMs/Leads: Focused on conversion, engagement, adoption
+   - Data Teams: More granular metrics, segment breakdowns, time trends
+
+
+Event Tracking	recommendation_viewed, item_added_to_cart
+Dashboard	Avg cart value by user group (test vs control)
+Alert	If cart value drops >15% vs control, trigger Slack alert
+
+Common Metrics:
+
+Uplift vs. baseline (e.g., +12% engagement)
+
+Conversion rate, bounce rate
+
+Average order value or user actions
+
+Experiment group comparisons
+
+✅ Tip: Always include a filterable control/test toggle when tracking A/B experiments
+
+🚨 3. Alerting — Catch Problems Early
+Goal: Detect and act on unexpected changes before they escalate.
+
+What to do:
+
+Set alerts on key performance indicators or guardrail metrics
+
+Use built-in alert systems (Looker/Metabase), or custom tools like:
+
+Slack alerts via webhook
+
+PagerDuty, Opsgenie, or email alerts
+
+SQL-based anomaly monitors
+
+Examples:
+
+Engagement drops >10% vs baseline
+
+Daily revenue dips below expected range
+
+Error rate > threshold in model predictions
+
+🧭 Example Workflow (Generalized)
+
+1. Analyst defines the success metrics and key events to track
+2. Engineer implements tracking in the product
+3. Data flows to warehouse (e.g., BigQuery, Snowflake)
+4. Dashboard shows real-time performance (Tableau, Looker)
+5. Alerts are triggered if drop-off, errors, or spikes are detected
+📝 Deliverables from This Step
+Deliverable	Description
+✅ Instrumented Events	Event specs implemented in product/system
+📊 Dashboards	Real-time visibility into performance
+🚨 Alerts	Monitors for guardrail metrics and unexpected anomalies
+
+💡 Example Use Case
+Scenario: You’re testing whether showing product recommendations increases average cart value.
+
+Step	Example Implementation
