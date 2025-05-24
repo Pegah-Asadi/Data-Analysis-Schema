@@ -468,4 +468,84 @@ Scenario: You’re testing whether showing product recommendations increases ave
 | Dashboard      | Avg cart value by user group (test vs control)           |
 | Alert          | If cart value drops >15% vs control, trigger Slack alert |
 
+📂 [See sample code for hypothesis testing →](./Implementation_Monitoring_Checklist.md)
+
+---
+
+## **📈 7 | Results Analysis**
+
+Once the experiment or model runs, it’s time to answer three key questions:  
+- Did it work?  
+- How much did it help?  
+- Who benefited the most—and is the result trustworthy?  
+
+### ✅ 1. Lift & ROI Analysis — "What Was the Impact?"
+
+Goal: Quantify the business value created by your change.
+
+Key metrics to evaluate:  
+- Lift → Difference between test and control (e.g., +12% conversion rate)  
+- ROI → Return on investment  
+
+`ROI = (Gain from Improvement−Cost of Change)/Cost of Change`
+​
+ 
+💡 Common Metrics:  
+- Conversion Uplift: +12% in test group  
+- Revenue Impact: +$50,000 increase in monthly revenue  
+- Cost Reduction: –$5 per user in support costs  
+- Efficiency Gains: Reduced time-to-resolution by 20%  
+
+✅ Tip: Always compare absolute values and relative % change for context.
+
+### 👥 2. Segment Deep-Dive — "Who Did It Work Best For?"
+
+Goal: Identify which user segments saw the biggest impact.
+
+Not all users respond the same. Break down your results to uncover hidden insights.
+
+🔍 Example Segmentation Dimensions:  
+- User type: New vs Returning  
+- Geography: North America, EU, APAC  
+- Traffic source: Organic, Paid, Referral  
+- Product usage: Light vs Power users  
+- Subscription tier: Free vs Premium  
+
+What to do:  
+1. Slice your primary metric by these segments  
+2. Compare performance across groups  
+3. Identify high-performing or underperforming cohorts  
+
+📊 Example Insight:  
+Conversion improved 18% for new users from paid ads, but only 4% for organic traffic.
+
+✅ Tip: These findings often inform future experiments or targeted product strategies.
+
+### 🧪 3. Statistical Confidence — "Can We Trust the Results?"
+
+Goal: Make sure your findings aren’t just random noise.
+
+Key Tools:
+- T-Test / Chi-Square Test → Compare group outcomes
+- P-Value < 0.05 → Indicates statistically significant result
+- Pre/Post Checks → Validate that groups were balanced before the experiment
+- CUPED (if available) → Reduces variance for faster and more accurate results
+
+Example:
+P-value = 0.02 → Significant lift
+
+No confounding product releases or outages during the test
+
+✅ Tip: Always check for external events that could bias your results.<br><br><br>
+
+### 📝 Deliverables from This Step
+
+| Deliverable             | Description                                             |
+| ----------------------- | ------------------------------------------------------- |
+| 📊 Impact Summary       | % lift, \$ value, efficiency gains                      |
+| 👥 Segment Analysis     | Segment-level comparisons with takeaways                |
+| 📈 ROI Calculation      | Business value gained vs cost of implementation         |
+| 🧪 Statistical Evidence | P-values, confidence intervals, pre-test balance checks |
+
+---
 
