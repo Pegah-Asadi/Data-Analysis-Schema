@@ -487,7 +487,7 @@ Key metrics to evaluate:
 - Lift → Difference between test and control (e.g., +12% conversion rate)  
 - ROI → Return on investment  
 
-`ROI = (Gain from Improvement−Cost of Change)/Cost of Change`
+`ROI = (Gain from Improvement − Cost of Change)/Cost of Change`
 ​
  
 💡 Common Metrics:  
@@ -546,6 +546,172 @@ No confounding product releases or outages during the test
 | 👥 Segment Analysis     | Segment-level comparisons with takeaways                |
 | 📈 ROI Calculation      | Business value gained vs cost of implementation         |
 | 🧪 Statistical Evidence | P-values, confidence intervals, pre-test balance checks |
+
+---
+
+## **🧠 8 | Insight Storytelling & Recommendation**
+
+The analysis is complete—now it’s time to communicate.  
+This step turns findings into action by helping stakeholders understand what happened, why it matters, and what to do next.
+
+🎯 Goals of This Step  
+- Summarize the problem, method, and key results  
+- Visualize the business impact clearly  
+- Recommend what to do next with data-driven confidence  
+- Align stakeholders across product, business, and tech  
+
+### 📊 1. Build an Executive Dashboard — “Show the Story Visually”
+
+Purpose: Give stakeholders a clear, visual snapshot of results and impact.
+
+What to include:  
+- Key KPIs: before vs. after comparison  
+- Line/bar charts for trends  
+- KPI cards for impact ($, %, time savings)  
+- Clear labels + filters (e.g., date, user segment, experiment group)  
+- Tools: Tableau, Looker, Power BI, Metabase  
+
+✅ Example:
+KPI Card: Engagement ↑ 15% | Churn ↓ 2%  
+Chart: Feature usage trendline (last 30 days) by group  
+
+🎨 Tip: Keep it clean, consistent, and filterable.
+
+### 📝 2. Create a “TL;DR” Slide — “One Slide, One Story”
+
+Purpose: Quickly convey the essence of your analysis in 30 seconds or less.
+
+Template Structure:
+
+| Section         | Description                                   |
+| --------------- | --------------------------------------------- |
+| **Problem**     | What were you solving for?                    |
+| **Method**      | What approach did you take? (EDA, A/B, model) |
+| **Result**      | What was the outcome? (impact, significance)  |
+| **Next Action** | What should we do next?                       |
+
+Example Slide:
+- Problem: 30% of new users drop off in week 1
+- Method: A/B test of onboarding checklist (n=5,000)
+- Result: +15% retention, p=0.02, $20K/month saved
+- Next Action: Roll out checklist to 100% of new users
+
+💡 Tip: Use this slide for team meetings, exec updates, or investor recaps.
+
+### 📌 3. Recommend a Clear Action Plan — “Now What?”
+
+Purpose: Turn insights into decisions and execution.
+
+What to include:  
+- Your recommended action (scale, iterate, pause)  
+- Rationale based on business impact  
+- Timeline and owners  
+- Optional: next test ideas or variations  
+
+Example Recommendations:  
+- ✅ Roll out to all users by end of Q2  
+- 🧪 Test variant B for segment X next  
+- 🕒 Monitor KPIs for 3 months post-launch  
+- ❌ Pause rollout due to low impact and high cost  
+
+🔁 Tip: Be realistic. Tie recommendations to business goals and capacity.<br><br><br>
+
+### 📦 Deliverables from This Step
+
+| Deliverable            | Description                                         |
+| ---------------------- | --------------------------------------------------- |
+| 📊 Executive Dashboard | Before/after metrics, trends, visual impact         |
+| 🧾 TL;DR Slide         | 1-slide summary: problem → method → result → action |
+| 🧭 Action Plan         | Next steps, rationale, timeline, ownership          |
+
+---
+
+## **📚 9 | Knowledge Management & Next Steps**
+
+Great analysis doesn’t end with insights, it lives on through documentation, reuse, and monitoring.  
+This step ensures your work is understandable, repeatable, and future-proof.
+
+🎯 Goals of This Step  
+- Document the logic, decisions, and results behind your analysis  
+- Keep metric definitions and logic aligned across the org  
+- Feed insights back into the product or data platform  
+- Plan for long-term tracking and maintenance  
+
+### 🗂️ 1. Document Queries & Code — “Make It Reusable”
+
+Goal: Ensure others can read, rerun, and adapt your work.
+
+What to do:
+1. Save SQL queries, Python notebooks, and assumptions in a shared space (e.g., GitHub, Confluence, internal wiki)  
+2. Add comments explaining:  
+   - What the query/script does  
+   - Why filters or logic were applied  
+5. Write a short README.md or inline summary for each file  
+
+Example:  
+- 📁 `ab_test_conversion.sql`  
+- 💬 `-- Calculates uplift in conversion rate for the homepage redesign test`  
+📓 Notebook cells + markdown = step-by-step walkthrough of logic and outputs  
+
+✅ Tip: Include input assumptions, test periods, and variable definitions directly in your notebooks or scripts.
+
+### 📖 2. Update the Data Dictionary — “Keep Metrics Consistent”
+
+Goal: Maintain a shared understanding of key fields, metrics, and calculations.
+
+What to do:  
+1. Use an internal tool (e.g., Notion, Confluence, Looker Dictionary, Google Sheets)  
+2. Define:  
+   - What each metric means (e.g., conversion_rate)  
+   - How it’s calculated (e.g., unique_conversions / unique_visitors)  
+   - Which tables/fields are involved  
+
+If no data dictionary exists: Start one—even a Google Doc works.  
+
+✅ Tip: This reduces confusion in future analyses and aligns product, marketing, and data teams.
+
+### 🔁 3. Feed Learnings Back into the System — “Make It Smarter”
+
+Goal: Use what you learned to improve tracking, data models, or user targeting.
+
+What to do:  
+1. Feed back new features or labels into your datasets  
+   - E.g., add a high_risk_user flag based on model output  
+   - Tag users who received a feature or treatment for future comparison  
+2. Share findings with product, marketing, or engineering to refine:  
+   - Event tracking  
+   - User segmentation  
+   - Model inputs and data pipelines  
+
+Example:  
+You built a model to predict churn → flag risky users in the main customer table  
+Or: You learned that early activity is a strong signal → request new tracking during onboarding  
+
+### 📅 4. Schedule Audits — “Check Back Later”
+
+Goal: Ensure your models, KPIs, and metrics remain accurate and relevant over time.
+
+What to do:  
+1. Set a reminder for a quarterly review of:  
+   - Model performance (e.g., accuracy, drift, recalibration)  
+   - Metric health (e.g., drop-off, new patterns)  
+2. Ask:  
+   - Is the ROI/lift still holding?  
+   - Have user behaviors changed?  
+   - Does the model still generalize?  
+
+Example Checks:  
+🔁 “Is engagement still +15% three months after launch?”  
+📉 “Has conversion dropped in a new user segment?”<br><br><br>
+
+### 📦 Deliverables from This Step
+
+| Deliverable                  | Description                                              |
+| ---------------------------- | -------------------------------------------------------- |
+| 📁 Documented Code & Queries | With comments, assumptions, and summaries                |
+| 📖 Updated Data Dictionary   | Clear definitions and logic for key metrics              |
+| 🔁 System Feedback           | New fields, labels, or product insights fed into systems |
+| 📅 Monitoring Plan           | Future audit schedule with owners and timing             |
 
 ---
 
