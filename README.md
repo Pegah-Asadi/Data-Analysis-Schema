@@ -404,8 +404,8 @@ Clarify:
 - Which properties to include (e.g., user ID, timestamp, session length)  
 
 Example Events:
-feature_shown, feature_clicked, conversion_completed
-experiment_group_assigned, email_opened, app_crash
+`feature_shown`, `feature_clicked`, `conversion_completed`
+`experiment_group_assigned`, `email_opened`, `app_crash`
 
 ✅ Tip: Always log a unique ID and timestamp for joinability and time-based analysis
 
@@ -419,61 +419,53 @@ What to do:
 3. Make dashboards user-friendly for:
    - PMs/Leads: Focused on conversion, engagement, adoption
    - Data Teams: More granular metrics, segment breakdowns, time trends
-
-
-Event Tracking	recommendation_viewed, item_added_to_cart
-Dashboard	Avg cart value by user group (test vs control)
-Alert	If cart value drops >15% vs control, trigger Slack alert
-
-Common Metrics:
-
-Uplift vs. baseline (e.g., +12% engagement)
-
-Conversion rate, bounce rate
-
-Average order value or user actions
-
-Experiment group comparisons
+4. Common Metrics:
+   - Uplift vs. baseline (e.g., +12% engagement)
+   - Conversion rate, bounce rate
+   - Average order value or user actions
+   - Experiment group comparisons
 
 ✅ Tip: Always include a filterable control/test toggle when tracking A/B experiments
 
-🚨 3. Alerting — Catch Problems Early
+### **🚨 3. Alerting — Catch Problems Early**
+
 Goal: Detect and act on unexpected changes before they escalate.
 
-What to do:
-
-Set alerts on key performance indicators or guardrail metrics
-
-Use built-in alert systems (Looker/Metabase), or custom tools like:
-
-Slack alerts via webhook
-
-PagerDuty, Opsgenie, or email alerts
-
-SQL-based anomaly monitors
+What to do:  
+1. Set alerts on key performance indicators or guardrail metrics
+2. Use built-in alert systems (Looker/Metabase), or custom tools like:
+3. Slack alerts via webhook
+4. PagerDuty, Opsgenie, or email alerts
+5. SQL-based anomaly monitors
 
 Examples:
-
-Engagement drops >10% vs baseline
-
-Daily revenue dips below expected range
-
-Error rate > threshold in model predictions
+- Engagement drops >10% vs baseline  
+- Daily revenue dips below expected range  
+- Error rate > threshold in model predictions  
 
 🧭 Example Workflow (Generalized)
 
-1. Analyst defines the success metrics and key events to track
-2. Engineer implements tracking in the product
-3. Data flows to warehouse (e.g., BigQuery, Snowflake)
-4. Dashboard shows real-time performance (Tableau, Looker)
-5. Alerts are triggered if drop-off, errors, or spikes are detected
+1. Analyst defines the success metrics and key events to track  
+2. Engineer implements tracking in the product  
+3. Data flows to warehouse (e.g., BigQuery, Snowflake)  
+4. Dashboard shows real-time performance (Tableau, Looker)  
+5. Alerts are triggered if drop-off, errors, or spikes are detected<br><br><br>
+
 📝 Deliverables from This Step
-Deliverable	Description
-✅ Instrumented Events	Event specs implemented in product/system
-📊 Dashboards	Real-time visibility into performance
-🚨 Alerts	Monitors for guardrail metrics and unexpected anomalies
+
+| Deliverable            | Description                                             |
+| ---------------------- | ------------------------------------------------------- |
+| ✅ Instrumented Events | Event specs implemented in product/system               |
+| 📊 Dashboards          | Real-time visibility into performance                   |
+| 🚨 Alerts              | Monitors for guardrail metrics and unexpected anomalies |
 
 💡 Example Use Case
 Scenario: You’re testing whether showing product recommendations increases average cart value.
 
-Step	Example Implementation
+| Step           | Example Implementation                                   |
+| -------------- | -------------------------------------------------------- |
+| Event Tracking | `recommendation_viewed`, `item_added_to_cart`            |
+| Dashboard      | Avg cart value by user group (test vs control)           |
+| Alert          | If cart value drops >15% vs control, trigger Slack alert |
+
+
