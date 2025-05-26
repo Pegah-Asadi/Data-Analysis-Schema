@@ -111,7 +111,7 @@ Make sure your data access aligns with legal, contractual, or internal governanc
 ## **4 | 🧰 Extraction & Preparation**
 
 This is where raw data turns into something meaningful.  
-Your goal: extract the right data, clean it, and shape it into an analysis-ready format.
+🎯 Goal: extract the right data, clean it, and shape it into an analysis-ready format.
 
 ### 🏗️ Step-by-Step Workflow
 
@@ -202,7 +202,7 @@ This is where ideas form and problems surface.
 
 &nbsp;
 
-### **🧭 1. Data Profiling: “What does the data look like?”**
+### ** 1. 🧭 Data Profiling: “What does the data look like?”**
 
 Start by exploring:  
 - Key metrics (e.g. # transactions, avg session duration, revenue per user)  
@@ -213,7 +213,7 @@ Start by exploring:
 - Slice by day-of-week, campaign, or product  
 - Example: Identify drop-offs after onboarding, spikes during promotions<br><br><br>
 
-### **🔗 2. Correlations & Patterns: “What moves together?”**
+### **2. 🔗 Correlations & Patterns: “What moves together?”**
 
 Look for relationships between variables.
 
@@ -223,7 +223,7 @@ Use this to:
 
 📂 [See sample code for EDA →](./EDA_Sample_Code.md) <br><br><br>
 
-### **🧪 3. Statistical Testing: “Is this difference real?”**
+### **3. 🧪 Statistical Testing: “Is this difference real?”**
 
 Use tests like t-tests, chi-square, or Mann-Whitney U to validate patterns in data.
 
@@ -234,7 +234,7 @@ Use when comparing:
 
 📂 [See sample code for hypothesis testing →](./Hypothesis_Testing_Sample_Code.md)<br><br><br>
 
-### **💡 4. Generate Hypotheses**
+### **4. 💡 Generate Hypotheses**
 
 Good hypotheses are:
 - Testable (you can collect or analyze the needed data)  
@@ -280,7 +280,7 @@ Use this when you want to test cause and effect.
 
 &nbsp;
 
-**✅ Key Steps for A/B Testing**   
+**Key Steps for A/B Testing**   
 1. Define Groups
    - Control Group: No change
    - Test Group: Receives the change (e.g., new feature, message)
@@ -346,7 +346,7 @@ Use this when you want to forecast outcomes based on patterns.
 
 &nbsp;
 
-**✅ Key Steps for Modeling**  
+**Key Steps for Modeling**  
 1. Define the Target  
    - Classification (e.g., churn: yes/no)
    - Regression (e.g., expected spend)
