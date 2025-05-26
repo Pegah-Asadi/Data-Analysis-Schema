@@ -13,7 +13,7 @@ Whether you're new to the role or just looking to sharpen your workflow, I hope 
 
 ---
 
-## **0 | 🧠 Frame the Business Question**
+## **1 | 🧠 Frame the Business Question**
 
 Before touching data, clarify:
 
@@ -31,7 +31,7 @@ Before touching data, clarify:
 
 ---
 
-## **1 | 🤝 Align with Stakeholders**
+## **2 | 🤝 Align with Stakeholders**
 
 Before touching data, I meet with each stakeholder group to understand their goals, constraints, and definitions of success.  
 Here’s how I align with each:
@@ -45,7 +45,7 @@ Here’s how I align with each:
 
 ---
 
-## 🧾 **2 | Data Audit & Governance**
+## **3 | 🧾 Data Audit & Governance**
 
 Before analysis begins, you need a clear picture of **what data you have**, **how clean it is**, and **whether you can use it**.  
 This step ensures your foundation is solid, technically and ethically.
@@ -108,7 +108,7 @@ Make sure your data access aligns with legal, contractual, or internal governanc
 
 ---
 
-## **🧰 3 | Extraction & Preparation**
+## **4 | 🧰 Extraction & Preparation**
 
 This is where raw data turns into something meaningful.  
 Your goal: extract the right data, clean it, and shape it into an analysis-ready format.
@@ -119,7 +119,9 @@ Your goal: extract the right data, clean it, and shape it into an analysis-ready
 | ------------- | ----------------------------------------- | ----------------------------------- |
 | **Extract**   | SQL (BigQuery, Snowflake, Redshift, etc.) | Source tables filtered & joined     |
 | **Transform** | Python (pandas), dbt, R, Spark            | Cleaned, structured dataset         |
-| **Validate**  | Python (asserts, checks), SQL             | QC/validation report, sanity checks |<br><br><br>
+| **Validate**  | Python (asserts, checks), SQL             | QC/validation report, sanity checks |
+
+&nbsp;
 
 ### 🔄 Key Principles
 
@@ -169,7 +171,7 @@ assert df['age'].between(0, 120).all(), "Invalid age values!"
 
 &nbsp;
 
-📂 Check out the practical [Python scripts](./Data_Cleaning_and_Validation.md) to speed up cleaning and validation
+[➡️ Full Python cleaning & validation snippets](./Data_Cleaning_and_Validation.md)
 
 These cover:  
 🔁 Removing duplicates  
@@ -179,16 +181,14 @@ These cover:
 
 ---
 
-## **🔍 4 | Exploratory Data Analysis (EDA) & Hypothesis Generation**
+## **🔍 5 | Exploratory Data Analysis (EDA) & Hypothesis Generation**
 
-Before you build a model or design an experiment, get to know your data.  
-EDA helps you spot patterns, uncover issues, and identify the relationships worth testing.
+This is where ideas form and problems surface.
 
-🎯 Goals of This Step  
-- Understand distributions, trends, and anomalies  
+🎯 Goals of This Step:  
+- Understand distributions, trends, and gaps  
 - Spot correlations and patterns  
-- Form hypotheses grounded in real data  
-- Get business and technical teams aligned before deeper analysis
+- Form testable hypotheses  
 
 ### ⚙️ EDA Workflow Summary
 
@@ -198,7 +198,9 @@ EDA helps you spot patterns, uncover issues, and identify the relationships wort
 | Time-based Trends        | Looker, Tableau          | Spot seasonal effects or churn spikes | Line charts by day/week/month       |
 | Correlation Matrix       | Python (Seaborn)         | Understand variable relationships     | `df.corr()`, `sns.heatmap()`        |
 | Variable Pair Trends     | Tableau or Python        | Visually inspect pairwise trends      | Scatter plots with trendlines       |
-| Group Comparisons        | SciPy, statsmodels       | Check if group differences are real   | `ttest_ind()`, `chi2_contingency()` |<br><br><br>
+| Group Comparisons        | SciPy, statsmodels       | Check if group differences are real   | `ttest_ind()`, `chi2_contingency()` |
+
+&nbsp;
 
 ### **🧭 1. Data Profiling: “What does the data look like?”**
 
@@ -240,10 +242,9 @@ Good hypotheses are:
 - Relevant (linked to a business goal)  
 
 **💭 Generic Example Hypotheses:**
-1. "Users who see the onboarding tutorial complete 25% more actions in week 1."  
-2. "Product reviews with images have higher average ratings than those without."  
-3. "Sending reminder emails reduces cart abandonment by 10%."  
-4. "Customers acquired via referral have higher LTV than paid users."<br><br><br>
+1. "Users who see onboarding complete 25% more actions in week 1."  
+2. "Paid users churn less than organic users."  
+3. "Feature X increases checkout rate by 10%."<br><br><br>
 
 ### 🧾 Deliverables for This Step  
 - Visualizations (distributions, trends, correlation plots)  
