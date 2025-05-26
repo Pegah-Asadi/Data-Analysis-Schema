@@ -181,7 +181,7 @@ These cover:
 
 ---
 
-## **🔍 5 | Exploratory Data Analysis (EDA) & Hypothesis Generation**
+## **5 | 🔍 Exploratory Data Analysis (EDA) & Hypothesis Generation**
 
 This is where ideas form and problems surface.
 
@@ -254,7 +254,7 @@ Good hypotheses are:
 
 ---
 
-## ** 6 | 🧪 Experiment or Modeling Design**
+## **6 | 🧪 Experiment or Modeling Design**
 
 This step is about how you validate your hypotheses. Based on the question, you’ll either:  
 - Test a causal relationship with an experiment (e.g., A/B test)  
@@ -458,7 +458,9 @@ Once the experiment or model runs, it’s time to answer three key questions:
 - How much did it help?  
 - Who benefited the most—and is the result trustworthy?  
 
-### ✅ 1. Lift & ROI Analysis — "What Was the Impact?"
+&nbsp;
+
+### 1. ✅ Lift & ROI Analysis — "What Was the Impact?"
 
 Goal: Quantify the business value created by your change.
 
@@ -468,7 +470,6 @@ Key metrics to evaluate:
 
 `ROI = (Gain from Improvement − Cost of Change)/Cost of Change`
 ​
- 
 💡 Common Metrics:  
 - Conversion Uplift: +12% in test group  
 - Revenue Impact: +$50,000 increase in monthly revenue  
@@ -477,11 +478,11 @@ Key metrics to evaluate:
 
 ✅ Tip: Always compare absolute values and relative % change for context.
 
-### 👥 2. Segment Deep-Dive — "Who Did It Work Best For?"
+&nbsp;
+
+### 2. 👥 Segment Deep-Dive — "Who Did It Work Best For?"
 
 Goal: Identify which user segments saw the biggest impact.
-
-Not all users respond the same. Break down your results to uncover hidden insights.
 
 🔍 Example Segmentation Dimensions:  
 - User type: New vs Returning  
@@ -495,12 +496,9 @@ What to do:
 2. Compare performance across groups  
 3. Identify high-performing or underperforming cohorts  
 
-📊 Example Insight:  
-Conversion improved 18% for new users from paid ads, but only 4% for organic traffic.
+&nbsp;
 
-✅ Tip: These findings often inform future experiments or targeted product strategies.
-
-### 🧪 3. Statistical Confidence — "Can We Trust the Results?"
+### 3. 🧪 Statistical Confidence — "Can We Trust the Results?"
 
 Goal: Make sure your findings aren’t just random noise.
 
@@ -509,11 +507,6 @@ Key Tools:
 - P-Value < 0.05 → Indicates statistically significant result
 - Pre/Post Checks → Validate that groups were balanced before the experiment
 - CUPED (if available) → Reduces variance for faster and more accurate results
-
-Example:
-P-value = 0.02 → Significant lift
-
-No confounding product releases or outages during the test
 
 ✅ Tip: Always check for external events that could bias your results.<br><br><br>
 
@@ -528,7 +521,7 @@ No confounding product releases or outages during the test
 
 ---
 
-## **🧠 8 | Insight Storytelling & Recommendation**
+## **9 | 🧠 Tell the Story & Recommend**
 
 The analysis is complete—now it’s time to communicate.  
 This step turns findings into action by helping stakeholders understand what happened, why it matters, and what to do next.
@@ -539,7 +532,9 @@ This step turns findings into action by helping stakeholders understand what hap
 - Recommend what to do next with data-driven confidence  
 - Align stakeholders across product, business, and tech  
 
-### 📊 1. Build an Executive Dashboard — “Show the Story Visually”
+&nbsp;
+
+### 1. 📊 Build an Executive Dashboard — “Show the Story Visually”
 
 Purpose: Give stakeholders a clear, visual snapshot of results and impact.
 
@@ -548,15 +543,13 @@ What to include:
 - Line/bar charts for trends  
 - KPI cards for impact ($, %, time savings)  
 - Clear labels + filters (e.g., date, user segment, experiment group)  
-- Tools: Tableau, Looker, Power BI, Metabase  
-
-✅ Example:
-KPI Card: Engagement ↑ 15% | Churn ↓ 2%  
-Chart: Feature usage trendline (last 30 days) by group  
+- Tools: Tableau, Looker, Power BI, Metabase   
 
 🎨 Tip: Keep it clean, consistent, and filterable.
 
-### 📝 2. Create a “TL;DR” Slide — “One Slide, One Story”
+&nbsp;
+
+### 2. 📝 Create a “TL;DR” Slide — “One Slide, One Story”
 
 Purpose: Quickly convey the essence of your analysis in 30 seconds or less.
 
@@ -569,15 +562,11 @@ Template Structure:
 | **Result**      | What was the outcome? (impact, significance)  |
 | **Next Action** | What should we do next?                       |
 
-Example Slide:
-- Problem: 30% of new users drop off in week 1
-- Method: A/B test of onboarding checklist (n=5,000)
-- Result: +15% retention, p=0.02, $20K/month saved
-- Next Action: Roll out checklist to 100% of new users
-
 💡 Tip: Use this slide for team meetings, exec updates, or investor recaps.
 
-### 📌 3. Recommend a Clear Action Plan — “Now What?”
+&nbsp;
+
+### 3. 📌 Recommend a Clear Action Plan — “Now What?”
 
 Purpose: Turn insights into decisions and execution.
 
@@ -605,7 +594,7 @@ Example Recommendations:
 
 ---
 
-## **📚 9 | Knowledge Management & Next Steps**
+## **10 | 📚 Document & Keep Learning**
 
 Great analysis doesn’t end with insights, it lives on through documentation, reuse, and monitoring.  
 This step ensures your work is understandable, repeatable, and future-proof.
@@ -616,7 +605,9 @@ This step ensures your work is understandable, repeatable, and future-proof.
 - Feed insights back into the product or data platform  
 - Plan for long-term tracking and maintenance  
 
-### 🗂️ 1. Document Queries & Code — “Make It Reusable”
+&nbsp;
+
+### 1. 🗂️ Document Queries & Code — “Make It Reusable”
 
 Goal: Ensure others can read, rerun, and adapt your work.
 
@@ -627,14 +618,11 @@ What to do:
    - Why filters or logic were applied  
 5. Write a short README.md or inline summary for each file  
 
-Example:  
-- 📁 `ab_test_conversion.sql`  
-- 💬 `-- Calculates uplift in conversion rate for the homepage redesign test`  
-📓 Notebook cells + markdown = step-by-step walkthrough of logic and outputs  
-
 ✅ Tip: Include input assumptions, test periods, and variable definitions directly in your notebooks or scripts.
 
-### 📖 2. Update the Data Dictionary — “Keep Metrics Consistent”
+&nbsp;
+
+### 2. 📖 Update the Data Dictionary — “Keep Metrics Consistent”
 
 Goal: Maintain a shared understanding of key fields, metrics, and calculations.
 
@@ -645,11 +633,9 @@ What to do:
    - How it’s calculated (e.g., unique_conversions / unique_visitors)  
    - Which tables/fields are involved  
 
-If no data dictionary exists: Start one—even a Google Doc works.  
+&nbsp;
 
-✅ Tip: This reduces confusion in future analyses and aligns product, marketing, and data teams.
-
-### 🔁 3. Feed Learnings Back into the System — “Make It Smarter”
+### 3. 🔁 Feed Learnings Back into the System — “Make It Smarter”
 
 Goal: Use what you learned to improve tracking, data models, or user targeting.
 
@@ -662,11 +648,9 @@ What to do:
    - User segmentation  
    - Model inputs and data pipelines  
 
-Example:  
-You built a model to predict churn → flag risky users in the main customer table  
-Or: You learned that early activity is a strong signal → request new tracking during onboarding  
+&nbsp;
 
-### 📅 4. Schedule Audits — “Check Back Later”
+### 4. 📅 Schedule Audits — “Check Back Later”
 
 Goal: Ensure your models, KPIs, and metrics remain accurate and relevant over time.
 
@@ -677,11 +661,7 @@ What to do:
 2. Ask:  
    - Is the ROI/lift still holding?  
    - Have user behaviors changed?  
-   - Does the model still generalize?  
-
-Example Checks:  
-🔁 “Is engagement still +15% three months after launch?”  
-📉 “Has conversion dropped in a new user segment?”<br><br><br>
+   - Does the model still generalize?<br><br><br>
 
 ### 📦 Deliverables from This Step
 
