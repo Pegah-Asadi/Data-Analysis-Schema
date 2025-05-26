@@ -254,12 +254,11 @@ Good hypotheses are:
 
 ---
 
-## **🧪 5 | Experiment or Modeling Design**
+## ** 6 | 🧪 Experiment or Modeling Design**
 
 This step is about how you validate your hypotheses. Based on the question, you’ll either:  
 - Test a causal relationship with an experiment (e.g., A/B test)  
 - Predict an outcome with a machine learning model  
-- Choosing the right method ensures your analysis answers the business question clearly and reliably.  
 
 ### 🎯 When to Use What?
 
@@ -278,6 +277,8 @@ Use this when you want to test cause and effect.
 - Does a new feature increase retention?  
 - Do email reminders reduce drop-off?  
 - Which landing page converts better?  
+
+&nbsp;
 
 **✅ Key Steps for A/B Testing**   
 1. Define Groups
@@ -303,7 +304,7 @@ sample_size_per_group = tt_ind_solve_power(effect_size=effect_size, alpha=alpha,
 print(f"Required sample size per group: {int(sample_size_per_group)} users")
 ```
 
-5. Randomization Plan
+4. Randomization Plan
 Ensure fair, unbiased assignment using hashing or row numbers.
 
 📂 Example code snippet for hashing:
@@ -318,10 +319,10 @@ MOD(FARM_FINGERPRINT(CAST(user_id AS STRING)), 100)
 ROW_NUMBER() OVER (ORDER BY RAND()) AS row_num
 ```
 
-7. Run & Monitor
+5. Run & Monitor
    - Duration: 2–4 weeks (depending on volume)
    - Track metrics in real time via dashboard
-8. Analyze Results
+6. Analyze Results
 Use statistical tests (like t-tests) to validate outcomes.
 
 📂 Example code snippet:
@@ -343,6 +344,8 @@ Use this when you want to forecast outcomes based on patterns.
 - Identify high-value leads  
 - Forecast sales or engagement  
 
+&nbsp;
+
 **✅ Key Steps for Modeling**  
 1. Define the Target  
    - Classification (e.g., churn: yes/no)
@@ -352,7 +355,7 @@ Use this when you want to forecast outcomes based on patterns.
    - Scale or encode if needed
 3. Model Selection
    - Logistic Regression: Simple classification
-   - Random Forest, XGBoost: More flexible and powerful
+   - Random Forest: More flexible and powerful
 4. Train & Validate
    - Use K-Fold cross-validation
    - Track accuracy, precision, recall, ROC-AUC
@@ -373,19 +376,18 @@ Use this when you want to forecast outcomes based on patterns.
    - Model performance metrics
    - Key insights (top predictors, expected outcomes)
 
-
 ---
 
-## **🚀 6 | Implementation & Monitoring**
+## **7 | 🚀 Implementation & Monitoring**
 
-This is where your analysis goes live—whether it’s a new experiment, a predictive model, or a business rule change.
+This is where your analysis goes live, whether it’s a new experiment, a predictive model, or a business rule change.
 
 **Your job is to make sure:**  
 - The right data is collected  
 - Stakeholders can track what’s happening  
 - Issues are caught early and actioned fast  
 
-### **🔧 1. Instrumentation — Set Up the Right Tracking**
+### **1. 🔧 Instrumentation — Set Up the Right Tracking**
 
 Goal: Ensure your product or system logs the right data to measure outcomes and impact.
 
@@ -403,7 +405,7 @@ Example Events:
 
 ✅ Tip: Always log a unique ID and timestamp for joinability and time-based analysis
 
-### **📊 2. Live Dashboards — Monitor Metrics in Real Time**
+### **2. 📊 Live Dashboards — Monitor Metrics in Real Time**
 
 Goal: Keep all stakeholders informed of the impact and performance.
 
@@ -413,24 +415,16 @@ What to do:
 3. Make dashboards user-friendly for:
    - PMs/Leads: Focused on conversion, engagement, adoption
    - Data Teams: More granular metrics, segment breakdowns, time trends
-4. Common Metrics:
-   - Uplift vs. baseline (e.g., +12% engagement)
-   - Conversion rate, bounce rate
-   - Average order value or user actions
-   - Experiment group comparisons
 
 ✅ Tip: Always include a filterable control/test toggle when tracking A/B experiments
 
-### **🚨 3. Alerting — Catch Problems Early**
+### **3. 🚨 Alerting — Catch Problems Early**
 
 Goal: Detect and act on unexpected changes before they escalate.
 
 What to do:  
 1. Set alerts on key performance indicators or guardrail metrics
-2. Use built-in alert systems (Looker/Metabase), or custom tools like:
-3. Slack alerts via webhook
-4. PagerDuty, Opsgenie, or email alerts
-5. SQL-based anomaly monitors
+2. Use built-in alert systems (Looker/Metabase), or custom tools like Slack alerts via webhook
 
 Examples:
 - Engagement drops >10% vs baseline  
@@ -453,20 +447,11 @@ Examples:
 | 📊 Dashboards          | Real-time visibility into performance                   |
 | 🚨 Alerts              | Monitors for guardrail metrics and unexpected anomalies |
 
-💡 Example Use Case
-Scenario: You’re testing whether showing product recommendations increases average cart value.
-
-| Step           | Example Implementation                                   |
-| -------------- | -------------------------------------------------------- |
-| Event Tracking | `recommendation_viewed`, `item_added_to_cart`            |
-| Dashboard      | Avg cart value by user group (test vs control)           |
-| Alert          | If cart value drops >15% vs control, trigger Slack alert |
-
-📂 [See sample code for hypothesis testing →](./Implementation_Monitoring_Checklist.md)
+[➡️ Monitoring checklist here](./Implementation_Monitoring_Checklist.md)
 
 ---
 
-## **📈 7 | Results Analysis**
+## **8 | 📈 Results Analysis**
 
 Once the experiment or model runs, it’s time to answer three key questions:  
 - Did it work?  
