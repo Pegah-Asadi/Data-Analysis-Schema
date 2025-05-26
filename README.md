@@ -1,10 +1,9 @@
 # **Data Analysis Schema**
 
-> A practical, repeatable framework for structured data analysis.
+> A practical, repeatable framework for structured, confident analysis.
 
-## "What's the **plan**?"
-
-That’s the question I hear most from data analysts, myself included.  
+## 🚀 Why This Exists
+  
 While every project has its own goal, strong analyses tend to follow the same core structure. This schema breaks it down into **10 clear steps**, from business framing to storytelling and documentation.
 Some steps are strategic, others are technical. Some include code, others are just mindset.
 
@@ -14,13 +13,13 @@ Whether you're new to the role or just looking to sharpen your workflow, I hope 
 
 ---
 
-## 🧠 **0 | Frame the Business Question**
+## **0 | 🧠 Frame the Business Question**
 
-Before any SQL or Python, clarify:
+Before touching data, clarify:
 
-✅ What’s the **business goal**? (e.g. retention, cost reduction, partner ROI)  
-📊 What **metrics** define success? (e.g. MAUs, cost per engaged member, NPS)  
-⚠️ What are the **constraints**? (e.g. privacy laws, sample size, data freshness)
+🎯 What’s the **business goal**? (e.g. increase retention, reduce costs, partner ROI)  
+📊 How will success be measured? (e.g. MAUs, NPS, churn rate)  
+⚠️ What are the **constraints**? (e.g. privacy laws, sample size, timelines)
 
 🛡️ Especially in regulated domains:
 
@@ -28,23 +27,21 @@ Before any SQL or Python, clarify:
 → Keep audit trails clean  
 → Only use the minimum necessary fields
 
-[💻 See code examples in SQL and Python](./Pseudonymization.md).
+[➡️ See pseudonymization code (SQL + Python)](./Pseudonymization.md).
 
 ---
 
-## 🤝 **1 | Stakeholder Alignment**
-
-Once the business question is framed, the next step is aligning with stakeholders.  
+## **1 | 🤝 Align with Stakeholders**
 
 Before touching data, I meet with each stakeholder group to understand their goals, constraints, and definitions of success.  
 Here’s how I align with each:
+
 | Role             | What they care about                    | What I deliver                     |
 | ---------------- | --------------------------------------- | ---------------------------------- |
-| Product Manager  | User experience & engagement            | 1-pager with problem & KPIs        |
-| Legal/Compliance | Data privacy & governance (HIPAA/PHIPA) | Data-flow diagram, pseudonym steps |
+| Product Manager  | User experience, engagement, retention  | 1-pager with problem & KPIs        |
+| Legal/Compliance | Data use & governance                   | Data-flow diagram, pseudonym steps |
 | Engineering/Data | Feasibility, pipelines, event tracking	 | Clear data needs + tracking plan   |
-| Executives       | Business impact (ROI, revenue, savings) | Summary slide with outcomes        |
-| Clinical Ops     | Health outcomes, operational efficiency | KPI glossary, outcome definitions  |
+| Executives       | Business impact (ROI, revenue, savings) | Clear outcomes in a slide          |
 
 ---
 
@@ -69,15 +66,16 @@ Examples include:
 | ---------------- | ----------------------------- | ------------------------- |
 | customers        | User profiles, demographics   | customer\_id, age, region |
 | transactions     | Purchase history              | txn\_id, amount, date     |
-| events           | App/page interactions         | user\_id, event\_name     |
+| events           | App usage                     | user\_id, event\_name     |
 | support\_tickets | Customer issues & resolutions | ticket\_id, issue\_type   |
 
-🧹 Check Data Quality
+&nbsp;
+
+### 🧹 Check Data Quality
 
 Clean data saves you from rework and false conclusions.
 
-Look for:
-
+Look for:  
 - Missing values (null % per column)  
 - Duplicates  
 - Invalid ranges (e.g., negative ages, future timestamps)  
@@ -90,19 +88,14 @@ Look for:
 
 Make sure your data access aligns with legal, contractual, or internal governance policies.
 
-Common best practices:  
+📄 Privacy Checklist:  
 - Use pseudonymized or anonymized IDs when sharing data  
 - Limit fields to the minimum necessary  
 - Keep processing logs or audit trails if required  
 - Understand any compliance frameworks (e.g., GDPR, SOC2, HIPAA if applicable)
-
-📄 Privacy Checklist:  
-- Personally identifiable info (PII) removed or masked  
-- Only essential fields used  
-- Shared files don’t expose sensitive data  
 - Access is role-based and logged<br><br><br>
 
-### 🗂️ Deliverables for This Step
+### 🗂️ Deliverables for This Step  
 
 📋 Data Inventory Table  
 → Clear list of all relevant tables, key fields, and purpose
@@ -117,7 +110,8 @@ Common best practices:
 
 ## **🧰 3 | Extraction & Preparation**
 
-This is where raw data turns into something meaningful. Your goal: extract the right data, clean it, and shape it into an analysis-ready format.
+This is where raw data turns into something meaningful.  
+Your goal: extract the right data, clean it, and shape it into an analysis-ready format.
 
 ### 🏗️ Step-by-Step Workflow
 
@@ -129,7 +123,7 @@ This is where raw data turns into something meaningful. Your goal: extract the r
 
 ### 🔄 Key Principles
 
-✅ Write Modular SQL  
+#### 1. Write Modular SQL  
 - Use CTEs (Common Table Expressions) to break down logic  
 - Keep queries readable and reusable
 - Example:
@@ -146,7 +140,7 @@ GROUP BY user_id;
 
 &nbsp;
 
-🧼 Transform in Code  
+#### 2. Transform in Code  
 Use pandas or dbt to:
 - Handle missing values  
 - Create new features  
@@ -160,7 +154,7 @@ df['days_since_signup'] = (today - df['signup_date']).dt.days
 
 &nbsp;
 
-🧪 Validate Your Output  
+#### 3. Validate Your Output  
 - Add assertions to catch edge cases and silent errors early:  
 ```Pyhton
 assert df['user_id'].isnull().sum() == 0, "Missing user IDs!"
@@ -173,10 +167,9 @@ assert df['age'].between(0, 120).all(), "Invalid age values!"
 - Modular extraction SQL — readable, reusable, and easy to debug  
 - Validation report or notebook — with assertions, checks, and summary stats
 
-### 🧹 Bonus: Ready-to-Use Python Scripts
-Want practical code to speed up cleaning and validation?
+&nbsp;
 
-📂 Check out the general [Python scripts](./Data_Cleaning_and_Validation.md) for data cleaning and validation
+📂 Check out the practical [Python scripts](./Data_Cleaning_and_Validation.md) to speed up cleaning and validation
 
 These cover:  
 🔁 Removing duplicates  
