@@ -1,45 +1,101 @@
 # 🧪 Hypothesis Testing – Sample Code
 
-Use this script to statistically test differences between two groups, such as different user segments or product versions.
+Compare two independent groups (A vs B). Includes normality + equal-variance checks and effect size.
+
+> **Requires:** `pandas`, `scipy`  (install via `pip install scipy`)
 
 ---
-
-## 🎯 Example Use Case
-
-"Do users who receive an onboarding email convert more in the first 7 days compared to those who don’t?"
-
----
-
-## 🔍 T-Test for Comparing Two Groups
 
 ```python
+"""
+Two-group comparison workflow
+––––––––––––––––––––––––––––––––––––––––––––––––
+1. Assumption checks      · normality (Shapiro) + variance (Levene)
+2. Choose proper test     · t-test  ↔ Mann–Whitney U
+3. Report effect size     · Cohen’s d
+"""
+
 import pandas as pd
-from scipy.stats import ttest_ind
+from scipy import stats
+import numpy as np
 
-# Load your data
-df = pd.read_csv('your_data.csv')
+# -------------------------------------------------------------
+# 0 · LOAD DATA
+# -------------------------------------------------------------
+df = pd.read_csv("your_data.csv")                 # <-- edit this line with your file
 
-# Replace with your actual group and metric columns
-group_a = df[df['group_column'] == 'A']['metric_column']
-group_b = df[df['group_column'] == 'B']['metric_column']
+# Define column names: one for grouping (e.g. "variant") and one for the numeric metric (e.g. "conversion")
+group_col  = "<group_column>"                     # e.g. "variant" with values like "A" and "B"
+metric_col = "<metric_column>"                    # e.g. "conversion"
 
-# Run an independent t-test
-t_stat, p_value = ttest_ind(group_a, group_b, nan_policy='omit')
+# Filter the DataFrame for each group, and drop missing values from the metric
+a = df[df[group_col] == "A"][metric_col].dropna()
+b = df[df[group_col] == "B"][metric_col].dropna()
 
-# Print results
-print(f"T-statistic: {t_stat:.2f}")
-print(f"P-value: {p_value:.4f}")
+# Ensure both groups have data — fail early if not
+assert len(a) and len(b), "Both groups must have data!"
 
-# Interpretation
-if p_value < 0.05:
-    print("Result is statistically significant. Difference is likely real.")
+# -------------------------------------------------------------
+# 1 · ASSUMPTION CHECKS
+# -------------------------------------------------------------
+# Test for normality using the Shapiro–Wilk test
+# For large samples (>5000), take a sample to avoid performance issues
+p_norm_a = stats.shapiro(a.sample(5000, replace=False) if len(a) > 5000 else a).pvalue
+p_norm_b = stats.shapiro(b.sample(5000, replace=False) if len(b) > 5000 else b).pvalue
+
+# Both groups are considered normal if both p-values > 0.05
+normal   = (p_norm_a > 0.05) and (p_norm_b > 0.05)
+
+# Test for equal variances using Levene's test
+p_levene = stats.levene(a, b).pvalue
+equal_var = p_levene > 0.05
+
+# Print results of assumption checks
+print(f"Normal? {normal}  |  Equal variances? {equal_var}")
+
+# -------------------------------------------------------------
+# 2 · SELECT & RUN TEST
+# -------------------------------------------------------------
+# If both groups are normally distributed, run an independent t-test
+# Otherwise, use the non-parametric Mann–Whitney U test
+if normal:
+    t_stat, p_val = stats.ttest_ind(a, b, equal_var=equal_var)
+    test_name = "Independent t-test"
 else:
-    print("No significant difference found.")
+    t_stat, p_val = stats.mannwhitneyu(a, b, alternative="two-sided")
+    test_name = "Mann–Whitney U"
+
+# -------------------------------------------------------------
+# 3 · EFFECT SIZE (Cohen’s d) – always useful
+# -------------------------------------------------------------
+# Define a function to calculate Cohen's d (standardized effect size)
+def cohens_d(x, y):
+    nx, ny      = len(x), len(y)
+    pooled_std  = np.sqrt(((nx - 1)*x.var(ddof=1) + (ny - 1)*y.var(ddof=1)) / (nx + ny - 2))
+    return (x.mean() - y.mean()) / pooled_std
+
+# Compute effect size
+d = cohens_d(a, b)
+
+# -------------------------------------------------------------
+# 4 · REPORT
+# -------------------------------------------------------------
+# Print test results and interpretation
+print(f"\n📊  {test_name}")
+print(f"   test statistic = {t_stat:.3f}")
+print(f"   p-value        = {p_val:.4f}")
+print(f"   Cohen’s d      = {d:.3f}")
+
+# Interpret the p-value at α = 0.05 (standard threshold for significance)
+alpha = 0.05
+if p_val < alpha:
+    print("✅ Statistically significant difference.")
+else:
+    print("🟡 No significant difference detected.")
 ```
 
-
-📝 Notes
-- group_column should be a binary label (e.g., 'A' vs 'B', 'with_email' vs 'no_email').  
-- metric_column is the numeric outcome you're comparing (e.g., engagement, spend, retention).  
-- nan_policy='omit' ensures missing values don't affect results.  
-- This test assumes equal variances. For unequal variances, use ttest_ind(..., equal_var=False).  
+🗒️ Adapting this template:  
+- Categorical outcomes → chi2_contingency on a 2×2 table.  
+- Paired samples (before/after) → stats.ttest_rel or Wilcoxon.  
+- Multiple groups → ANOVA + post-hoc (Tukey HSD).  
+- Large, skewed metrics (e.g. revenue) often break normality—go straight to Mann-Whitney or bootstrap. 
