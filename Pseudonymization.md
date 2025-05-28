@@ -74,6 +74,8 @@ df["user_id_hash"] = df["user_id"].apply(sha256_hex)
 del df["user_id"]        # or df = df.drop(columns="user_id")
 ```
 
+&nbsp;
+
 ## 🔐 Row-Level Security (BigQuery example)
 
 BigQuery’s row-access policies hide rows a user shouldn’t see.
