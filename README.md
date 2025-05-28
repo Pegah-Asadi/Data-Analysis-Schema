@@ -126,23 +126,25 @@ This is where raw data turns into something meaningful.
 ### 🔄 Key Principles
 
 #### 1. Write Modular SQL  
-- Use CTEs (Common Table Expressions) to break down logic  
-- Keep queries readable and reusable
-- Example:
-```SQL
+Use CTEs to chunk logic and keep queries reusable.
+
+```sql
+-- Example: filter once, aggregate later
 WITH filtered_events AS (
   SELECT *
-  FROM events
-  WHERE event_date >= '2024-01-01'
+  FROM   events
+  WHERE  event_date >= DATE '2024-01-01'
 )
-SELECT user_id, COUNT(*) AS event_count
+SELECT
+    user_id,
+    COUNT(*) AS event_count
 FROM filtered_events
 GROUP BY user_id;
 ```
 
 &nbsp;
 
-#### 2. Transform in Code  
+#### 2. Transform in Code (pandas example)  
 Use pandas or dbt to:
 - Handle missing values  
 - Create new features  
@@ -150,13 +152,19 @@ Use pandas or dbt to:
 
 - Example:
 ```Python
-df['signup_date'] = pd.to_datetime(df['signup_date'])
-df['days_since_signup'] = (today - df['signup_date']).dt.days
+import pandas as pd
+from datetime import date
+
+today = date.today()
+
+# df = pd.read_csv("path/to/file.csv")
+df["signup_date"] = pd.to_datetime(df["signup_date"], errors="coerce")
+df["days_since_signup"] = (today - df["signup_date"].dt.date).dt.days
 ```
 
 &nbsp;
 
-#### 3. Validate Your Output  
+#### 3. Validate early & loudly 
 - Add assertions to catch edge cases and silent errors early:  
 ```Pyhton
 assert df['user_id'].isnull().sum() == 0, "Missing user IDs!"
@@ -165,9 +173,9 @@ assert df['age'].between(0, 120).all(), "Invalid age values!"
 - Create a QC report: null %s, duplicate counts, type mismatches, etc.<br><br><br>
 
 ### 📦 Deliverables for This Step  
-- Clean dataset — ready for EDA or modeling  
-- Modular extraction SQL — readable, reusable, and easy to debug  
-- Validation report or notebook — with assertions, checks, and summary stats
+- Clean dataset ready for EDA/modeling  
+- Modular SQL (readable, debug-friendly)   
+- Validation report (or notebook) documenting checks
 
 &nbsp;
 
