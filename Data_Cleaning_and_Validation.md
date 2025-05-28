@@ -153,7 +153,9 @@ assert (df['revenue'] > 0).all(), "Revenue column has non-positive values!"
 interactions_per_user = df.groupby('user_id').size()
 assert (interactions_per_user >= 1).all(), "Some users have no interactions!"
 
-### ✅ FINAL STATUS ###
+# ---------------------------------------------------------
+# ✅ FINAL STATUS
+# ---------------------------------------------------------
 print("✅ All validations passed. Data looks good!")
 ```
 
