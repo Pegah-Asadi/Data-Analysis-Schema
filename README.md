@@ -347,6 +347,8 @@ else:
 
 ```
 
+📂 [See code for A/B Testing Template →](./AB_Testing_Template.md)<br><br><br>
+
 ### **B. 🤖 Predictive Modeling**
 
 Use this when you want to forecast outcomes based on patterns.
@@ -375,7 +377,7 @@ Use this when you want to forecast outcomes based on patterns.
    - Examine feature importance
    - Validate business relevance
 
-📂 [See predictive modeling code example →]<br><br><br>
+📂 [See predictive modeling code example →](./Predictive_Modeling.md)<br><br><br>
 
 ### **📝 Deliverables for This Step**
 1. For A/B Testing:
@@ -397,7 +399,7 @@ This is where your analysis goes live, whether it’s a new experiment, a predic
 **Your job is to make sure:**  
 - The right data is collected  
 - Stakeholders can track what’s happening  
-- Issues are caught early and actioned fast  
+- Issues are caught early and actioned fast<br><br><br>
 
 ### **1. 🔧 Instrumentation — Set Up the Right Tracking**
 
