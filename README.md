@@ -210,7 +210,7 @@ This is where ideas form and problems surface.
 
 &nbsp;
 
-### ** 1. 🧭 Data Profiling: “What does the data look like?”**
+### **1. 🧭 Data Profiling: “What does the data look like?”**
 
 Start by exploring:  
 - Key metrics (e.g. # transactions, avg session duration, revenue per user)  
@@ -298,32 +298,26 @@ Use this when you want to test cause and effect.
 3. Calculate Sample Size
 Use power analysis to ensure you can detect a meaningful difference.
 
-📂 Example code snippet for calculating sample size:
-```python
-from statsmodels.stats.power import tt_ind_solve_power
+📂 [See code for A/B Test Sample Size Calculator →](./Sample_Size_Calculator.md)
 
-# Parameters
-effect_size = 0.2  # Small effect size (standardized difference)
-alpha = 0.05       # 5% significance level
-power = 0.8        # 80% chance of detecting an effect
-
-# Calculate
-sample_size_per_group = tt_ind_solve_power(effect_size=effect_size, alpha=alpha, power=power)
-print(f"Required sample size per group: {int(sample_size_per_group)} users")
-```
-
-4. Randomization Plan
+4. Random assignment (SQL)
 Ensure fair, unbiased assignment using hashing or row numbers.
 
-📂 Example code snippet for hashing:
-```python
-MOD(FARM_FINGERPRINT(CAST(user_id AS STRING)), 100)
-# FARM_FINGERPRINT(...): creates a hash of the user ID. This generates a deterministic but seemingly random number — perfect for consistent random assignment.
-# MOD(..., 100): gets the last two digits (like a bucket from 0 to 99). So we have 100 buckets total.
+```SQL
+/* Assign buckets 0-49 → control, 50-99 → test. */
+/* BigQuery */
+MOD( FARM_FINGERPRINT(CAST(user_id AS STRING)), 100 ) AS bucket_id
+
+/* Snowflake / Databricks */
+MOD( ABS( HASH(user_id) ), 100 ) AS bucket_id
+
+/* Redshift / Postgres */
+MOD( ABS( HASHTEXT(user_id::text) ), 100 ) AS bucket_id
 ```
 
-📂 Example code snippet in case you want an exact count:
-```python
+📂 One-liner random row numbering (exact counts):
+```SQL
+/* Use when you need exactly n users per group (grab first n rows for control, next n for test). */
 ROW_NUMBER() OVER (ORDER BY RAND()) AS row_num
 ```
 
@@ -335,12 +329,22 @@ Use statistical tests (like t-tests) to validate outcomes.
 
 📂 Example code snippet:
 ```python
-import scipy.stats as stats
+import pandas as pd
+from scipy import stats
 
-# Assume you have two arrays: control_engagement, test_engagement
-t_stat, p_value = stats.ttest_ind(control_engagement, test_engagement)
+df = pd.read_csv("ab_results.csv")
+ctrl = df[df["group"] == "control"]["metric"].dropna()
+test = df[df["group"] == "test"]["metric"].dropna()
 
-print(f"T-statistic: {t_stat:.3f}, p-value: {p_value:.3f}")
+# Welch’s handles unequal variances; switch to ttest_ind(..., equal_var=True) if Levene’s test confirms homoscedasticity.
+t, p = stats.ttest_ind(ctrl, test, equal_var=False)  # Welch
+print(f"t = {t:.3f} | p = {p:.3f}")
+
+if p < 0.05:
+    print("✅ Stat-sig uplift.")
+else:
+    print("🟡 No significant difference.")
+
 ```
 
 ### **B. 🤖 Predictive Modeling**
@@ -371,7 +375,7 @@ Use this when you want to forecast outcomes based on patterns.
    - Examine feature importance
    - Validate business relevance
 
-📂 See predictive modeling code example →<br><br><br>
+📂 [See predictive modeling code example →]<br><br><br>
 
 ### **📝 Deliverables for This Step**
 1. For A/B Testing:
