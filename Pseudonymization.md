@@ -1,6 +1,6 @@
 # 01 | 🔐 Pseudonymization & Row-Level Security
  
-The pattern below uses **SHA-256 → hex**—portable across BigQuery, Snowflake, Databricks, Redshift, Postgres.
+The pattern below uses **SHA-256 → hex** - portable across BigQuery, Snowflake, Databricks, Redshift, Postgres.
 
 ---
 
