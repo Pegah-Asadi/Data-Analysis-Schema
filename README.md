@@ -417,7 +417,7 @@ Example Events:
 `feature_shown`, `feature_clicked`, `conversion_completed`
 `experiment_group_assigned`, `email_opened`, `app_crash`
 
-✅ Tip: Always log a unique ID and timestamp for joinability and time-based analysis
+✅ Tip: Always log a unique ID and timestamp for joinability and time-based analysis<br><br><br>
 
 ### **2. 📊 Live Dashboards — Monitor Metrics in Real Time**
 
@@ -430,7 +430,7 @@ What to do:
    - PMs/Leads: Focused on conversion, engagement, adoption
    - Data Teams: More granular metrics, segment breakdowns, time trends
 
-✅ Tip: Always include a filterable control/test toggle when tracking A/B experiments
+✅ Tip: Always include a filterable control/test toggle when tracking A/B experiments<br><br><br>
 
 ### **3. 🚨 Alerting — Catch Problems Early**
 
